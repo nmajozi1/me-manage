@@ -1,0 +1,19 @@
+.card-properties {
+  margin: auto;
+  min-height: 150px;
+  background: #fff;
+  border-radius: 2px;
+  position: relative;
+}
+
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.gen-spacer {
+  min-height: 60px;
+}
+
+.fab-button {
+  font-size: 50px;
+}
