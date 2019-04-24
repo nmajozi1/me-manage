@@ -24,7 +24,8 @@ export class LoginFormComponent implements OnInit {
     .subscribe((response) => {
       // this.Employee = data;
 
-      this.router.navigate(['/dashboard']);
+      // this.router.navigate(['/dashboard']);
+      this.router.navigate(['home']);
     });
   }
 

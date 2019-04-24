@@ -1,0 +1,16 @@
+.col-properties {
+  padding-top: 20px;
+  text-align: center;
+}
+
+.card-properties {
+  margin: auto;
+  min-height: 225px;
+  background: #fff;
+  border-radius: 2px;
+  position: relative;
+}
+
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
