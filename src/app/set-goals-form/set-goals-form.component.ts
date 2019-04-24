@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { GOAL } from '../goal-items';
+import { SetGoalService } from '../services/set-goal.service';
+import { SetGoalModalComponent } from '../set-goal-modal/set-goal-modal.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-set-goals-form',
@@ -13,25 +16,48 @@ export class SetGoalsFormComponent implements OnInit {
   add = '+';
 
   count = 0;
+  goalList: any = [];
 
-  goalItems = GOAL;
+  constructor(private router: Router, private goalService: SetGoalService, public dialog: MatDialog) {}
 
   addBillItem() {
-    // console.log('INIT RESP: ', this.billService.getBudgetItems());
-    console.log('add bill item');
-    this.router.navigate(['/side-nav']);
+    const dialogRef = this.dialog.open(SetGoalModalComponent, {
+      width: '250px',
+      height: '350px',
+      data: {goal: '', amount: 0}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
-  constructor(private http: HttpClient, private router: Router) {
+  refineData() {
     let sum = 0;
-    for (const item of this.goalItems) {
+    for (const item of this.goalList.data) {
       sum = sum + item.amount;
     }
 
+    console.log('SUM: ', sum);
     this.count = sum;
   }
 
+  getGoalData() {
+    this.goalService.getGoals()
+    .subscribe(response => {
+      this.goalList = response;
+
+      this.refineData();
+    });
+  }
+
   ngOnInit() {
+    this.goalService.getGoals()
+    .subscribe(response => {
+      this.goalList = response;
+
+      this.refineData();
+    });
   }
 
 }

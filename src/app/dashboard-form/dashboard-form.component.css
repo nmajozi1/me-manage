@@ -17,3 +17,14 @@
 .fab-button {
   font-size: 50px;
 }
+
+.section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.margin {
+  margin: 10px;
+}

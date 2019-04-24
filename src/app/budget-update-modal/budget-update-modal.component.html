@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Update Budget Item</h1>
+<div mat-dialog-content>
+
+  <mat-form-field class="input-full-width">
+    <input matInput placeholder="Item" [(ngModel)] = "data.item" disabled=true>
+  </mat-form-field>
+
+  <mat-form-field class="input-full-width">
+      <input matInput placeholder="Amount" [(ngModel)]="data.amount">
+  </mat-form-field>
+
+  <mat-form-field class="input-full-width">
+      <input matInput placeholder="Payment" [(ngModel)]="data.payment" disabled=true>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color = "primary" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color = "primary" (click)="onSubmit()">Update</button>
+  <button mat-raised-button color = "primary" (click)="remove()">Remove</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial></button>
+</div>

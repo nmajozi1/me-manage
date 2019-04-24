@@ -11,28 +11,33 @@
         &nbsp;
 
         <mat-form-field class="login-full-width">
-          <input matInput placeholder="Name">
+          <input type="text" matInput placeholder="Name" [(ngModel)]="data.name" name="name">
         </mat-form-field>
 
         <mat-form-field class="login-full-width">
-          <input type="password" matInput placeholder="Surname">
+          <input type="text" matInput placeholder="Surname" [(ngModel)]="data.surname" name="surname">
         </mat-form-field>
 
         <mat-form-field class="login-full-width">
-          <input type="password" matInput placeholder="Email">
+          <input type="email" matInput placeholder="Email" [(ngModel)]="data.email" name="email">
         </mat-form-field>
 
         <mat-form-field class="login-full-width">
-          <input type="password" matInput placeholder="Password">
+            <input type="text" matInput placeholder="Username" [(ngModel)]="data.username" name="username">
+          </mat-form-field>
+
+        <mat-form-field class="login-full-width">
+          <input type="password" matInput placeholder="Password" [(ngModel)]="data.password" name="password">
         </mat-form-field>
 
         <mat-form-field class="login-full-width">
-          <input type="password" matInput placeholder="Re-Type Password">
+          <input type="password" matInput placeholder="Re-Type Password" [(ngModel)]="data.retype" name="retype">
         </mat-form-field>
 
         &nbsp;
 
-        <button mat-raised-button color="primary" class="button-properties">Login</button>
+        <button mat-raised-button color="primary" (click)="register()" class="button-properties">Register</button>
+
       </form>
   </mat-card>
 </div>

@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { FormsModule } from '@angular/forms';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
@@ -12,7 +14,9 @@ import {
   MatCardModule,
   MatInputModule,
   MatDividerModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatDialogModule,
+  MatSlideToggleModule
 } from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { LoginFormComponent } from './login-form/login-form.component';
@@ -24,6 +28,16 @@ import { SetGoalsComponent } from './set-goals/set-goals.component';
 import { SetGoalsFormComponent } from './set-goals-form/set-goals-form.component';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { BudgetListModalComponent } from './budget-list-modal/budget-list-modal.component';
+import { RefreshComponent } from './refresh/refresh.component';
+import { BudgetUpdateModalComponent } from './budget-update-modal/budget-update-modal.component';
+import { GenericDialogComponent } from './generic-dialog/generic-dialog.component';
+import { SetGoalModalComponent } from './set-goal-modal/set-goal-modal.component';
+import { Common } from './common';
+import { HandleError } from './handle-error';
+import { RefreshGoalComponent } from './refresh-goal/refresh-goal.component';
+import { User } from './user';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -38,7 +52,14 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     SetGoalsComponent,
     SetGoalsFormComponent,
     SideNavComponent,
-    NavBarComponent
+    NavBarComponent,
+    BudgetListModalComponent,
+    RefreshComponent,
+    BudgetUpdateModalComponent,
+    GenericDialogComponent,
+    SetGoalModalComponent,
+    RefreshGoalComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,13 +67,17 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatCardModule,
     MatInputModule,
     MatDividerModule,
     HttpClientModule,
-    MatSidenavModule
+    MatSidenavModule,
+    FormsModule,
+    MatSlideToggleModule
   ],
-  providers: [],
+  entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent],
+  providers: [Common, HandleError, User],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

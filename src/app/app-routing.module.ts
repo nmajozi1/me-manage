@@ -4,8 +4,11 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SetGoalsComponent } from './set-goals/set-goals.component';
+import { RefreshComponent } from './refresh/refresh.component';
 
 import { SideNavComponent } from './side-nav/side-nav.component';
+import { RefreshGoalComponent } from './refresh-goal/refresh-goal.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {path: 'register', component: RegisterComponent},
@@ -13,11 +16,14 @@ const routes: Routes = [
   {path: 'dashboard', component: DashboardComponent},
   {path: 'set-goals', component: SetGoalsComponent},
   {path: 'side-nav', component: SideNavComponent},
+  {path: 'refresh', component: RefreshComponent},
+  {path: 'refreshGoal', component: RefreshGoalComponent},
+  {path: 'home', component: HomeComponent},
   {path: '', redirectTo: '/login', pathMatch: 'full'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation: 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
