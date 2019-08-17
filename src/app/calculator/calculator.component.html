@@ -1,0 +1,37 @@
+<h1 mat-dialog-title>Calculator</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <input matInput [(ngModel)]="num">
+  </mat-form-field>
+
+  <div class="row">
+    <button mat-button (click)="numClick(1)">1</button>
+    <button mat-button (click)="numClick(2)">2</button>
+    <button mat-button (click)="numClick(3)">3</button>
+  </div>
+
+  <div class="row">
+    <button mat-button (click)="numClick(4)">4</button>
+    <button mat-button (click)="numClick(5)">5</button>
+    <button mat-button (click)="numClick(6)">6</button>
+  </div>
+
+  <div class="row">
+    <button mat-button (click)="numClick(7)">7</button>
+    <button mat-button (click)="numClick(8)">8</button>
+    <button mat-button (click)="numClick(9)">9</button>
+  </div>
+
+  <div class="row">
+    <button mat-button>+</button>
+    <button mat-button (click)="numClick(0)">0</button>
+    <button mat-button>-</button>
+  </div>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="accent" (click)="onSubmit()">=</button>
+  <!-- <button mat-raised-button color="primary" (click)="backSpace()">bck</button> -->
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial></button>
+</div>

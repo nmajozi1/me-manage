@@ -7,6 +7,7 @@ import { DashboardService } from '../services/dashboard.service';
 import { BudgetListModalComponent } from '../budget-list-modal/budget-list-modal.component';
 import { BudgetUpdateModalComponent } from '../budget-update-modal/budget-update-modal.component';
 import { MatDialog } from '@angular/material';
+import { CalculatorComponent } from '../calculator/calculator.component';
 
 @Component({
   selector: 'app-dashboard-form',
@@ -37,6 +38,18 @@ export class DashboardFormComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+    });
+  }
+
+  showCalculator(): void {
+    const dialogRef = this.dialog.open(CalculatorComponent, {
+      width: '220px',
+      height: '350px',
+      data: {item: '', amount: 0}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('THE CALCULATOR IS CLOSED!');
     });
   }
 

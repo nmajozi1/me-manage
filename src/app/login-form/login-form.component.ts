@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { LoginService } from '../services/login.service';
 import { HttpClient } from '@angular/common/http';
-
-import { catchError, map, tap } from 'rxjs/operators';
 import { User } from '../user';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-login-form',
@@ -15,18 +13,23 @@ import { User } from '../user';
 
 export class LoginFormComponent implements OnInit {
 
-  // Employee: any = [];
+  loginForm = new FormGroup({
+    name: new FormControl(''),
+    password: new FormControl('')
+  });
 
   constructor(private router: Router, private loginService: LoginService, private http: HttpClient, public data: User) {}
 
+  // name = new FormControl('');
+
   login(): void {
+    console.log(this.data);
     this.loginService.login(this.data)
     .subscribe((response) => {
-      // this.Employee = data;
-
-      // this.router.navigate(['/dashboard']);
       this.router.navigate(['home']);
     });
+
+    // console.warn(this.loginForm.value);
   }
 
   register() {

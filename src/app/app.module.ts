@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
@@ -38,6 +38,8 @@ import { HandleError } from './handle-error';
 import { RefreshGoalComponent } from './refresh-goal/refresh-goal.component';
 import { User } from './user';
 import { HomeComponent } from './home/home.component';
+import { GridRowsComponent } from './grid-rows/grid-rows.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -59,7 +61,9 @@ import { HomeComponent } from './home/home.component';
     GenericDialogComponent,
     SetGoalModalComponent,
     RefreshGoalComponent,
-    HomeComponent
+    HomeComponent,
+    GridRowsComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
@@ -74,9 +78,10 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     MatSidenavModule,
     FormsModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    ReactiveFormsModule,
   ],
-  entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent],
+  entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent, CalculatorComponent],
   providers: [Common, HandleError, User],
   bootstrap: [AppComponent]
 })

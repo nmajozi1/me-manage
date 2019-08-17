@@ -11,16 +11,16 @@
         &nbsp;
 
         <mat-form-field class="login-full-width">
-          <input matInput placeholder="Username" [(ngModel)]="data.username" name="username">
+          <input matInput placeholder="Username" name="username" [(ngModel)]="data.username">
         </mat-form-field>
 
         <mat-form-field class="login-full-width">
-          <input type="password" matInput placeholder="Password" [(ngModel)]="data.password" name="password">
+          <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="data.password">
         </mat-form-field>
 
         &nbsp;
 
-        <button mat-raised-button color="primary" class="button-properties" (click)="login()">Login</button>
+        <button type="submit" [disabled]="!loginForm.valid" mat-raised-button color="primary" class="button-properties" (click)="login()">Login</button>
 
         &nbsp;
 

@@ -27,6 +27,7 @@ export class LoginService {
   };
 
   public login(data: any): Observable<User> {
+    console.log(`URL: ${this.loginUrl} DATA: ${data}`);
     return this.http.post<User>(this.loginUrl, data)
     .pipe(retry(1),
     catchError(this.handleError));
