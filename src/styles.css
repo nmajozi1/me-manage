@@ -1,1 +1,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+.card-properties {
+  margin: auto;
+  min-height: 150px;
+  background: rgb(31, 30, 30);
+  color: rgb(57, 121, 57);
+  font-size: 14px;
+  border-radius: 8px;
+  position: relative;
+}

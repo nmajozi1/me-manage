@@ -1,16 +1,32 @@
-.col-properties {
+.row-properties {
   padding-top: 20px;
-  text-align: center;
-}
-
-.card-properties {
-  margin: auto;
-  min-height: 225px;
-  background: #fff;
-  border-radius: 2px;
-  position: relative;
+  display: inline-block;
+  /* width: 100%; */
+  padding-right: 10px;
+  padding-left: 5px;
 }
 
 .card-5 {
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.row {
+  width: 100%;
+  display: inline-block;
+}
+
+.side-nav {
+  width: 350px;
+  height: 100%;
+  color: white;
+  display: inline-block;
+  background-color: blue;
+}
+
+.card-properties {
+  width: 350px;
+}
+
+.container {
+  height: 100%;
 }

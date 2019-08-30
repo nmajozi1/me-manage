@@ -1,77 +1,31 @@
-<div class="row" style="margin: auto;">
-  <div class="col-sm-12" style="background-color: white; min-height: 70px;">
+<div class="row container">
+  <!-- <div class="side-nav">
+    <p style="color: black">The Side Navigation</p>
+  </div> -->
 
+  <div class="row-properties" *ngFor="let dashboard of dashboards; let i = index">
+    <mat-card class="card-properties card-5" (click)="goalItem(dashboard.path)">
+      <mat-card-title>
+        <h3>{{dashboard.name}}</h3>
+      </mat-card-title>
+
+      <mat-card-content>
+        <p>{{dashboard.description}}</p>
+      </mat-card-content>
+    </mat-card>
   </div>
 
-  <div class="col-sm-4 col-properties">
-      <mat-card class="card-properties card-5" (click)="budgetList()">
-          <mat-card-title>
-            <h3>BUDGET LIST</h3>
-          </mat-card-title>
+  <!-- <div class="row-properties" *ngFor="let dashboard of dashboards; let i = index">
+    <mat-card class="card-properties card-5" (click)="goalItem(dashboard.path)">
+      <mat-card-title>
+        <h3>{{dashboard.name}}</h3>
+      </mat-card-title>
 
-          <mat-card-content>
-            <p>Manage your monthly budget.</p>
-          </mat-card-content>
-        </mat-card>
-  </div>
+      <mat-card-content>
+        <p>{{dashboard.description}}</p>
+      </mat-card-content>
+    </mat-card>
+  </div> -->
 
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5" (click)="goalList()">
-        <mat-card-title>
-          <h3>GOAL LIST</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Manage your goals, and list of goals.</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5" (click)="personalGoals()">
-        <mat-card-title>
-          <h3>PERSONAL GOALS</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Manage your personal goals.</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
 </div>
+
