@@ -3,75 +3,15 @@
 
   </div>
 
-  <div class="col-sm-4 col-properties">
-      <mat-card class="card-properties card-5" (click)="budgetList()">
+  <div class="col-sm-4 col-properties" *ngFor="let dashboard of dashboards">
+      <mat-card class="card-properties card-5" (click)="route(dashboard.path)">
           <mat-card-title>
-            <h3>BUDGET LIST</h3>
+            <h3>{{dashboard.name}}</h3>
           </mat-card-title>
 
           <mat-card-content>
-            <p>Manage your monthly budget.</p>
+            <p>{{dashboard.description}}</p>
           </mat-card-content>
         </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5" (click)="goalList()">
-        <mat-card-title>
-          <h3>GOAL LIST</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Manage your goals, and list of goals.</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5" (click)="personalGoals()">
-        <mat-card-title>
-          <h3>PERSONAL GOALS</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Manage your personal goals.</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
-  </div>
-
-  <div class="col-sm-4 col-properties">
-    <mat-card class="card-properties card-5">
-        <mat-card-title>
-          <h3>To Fill</h3>
-        </mat-card-title>
-
-        <mat-card-content>
-          <p>Throw some data in here</p>
-        </mat-card-content>
-      </mat-card>
   </div>
 </div>

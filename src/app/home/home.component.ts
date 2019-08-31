@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HomeService } from '../services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -8,22 +9,24 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  dashboards: [] = [];
+
+  constructor(private router: Router, private homeService: HomeService) { }
 
   ngOnInit() {
+    this.homeService.getDashboard().subscribe(response => {
+
+      if (response.data.length > 0) {
+        this.dashboards = response.data;
+      } else {
+        this.router.navigate(['']);
+      }
+
+    });
   }
 
-  budgetList(): void {
-    this.router.navigate(['dashboard']);
-  }
-
-  goalList(): void {
-    console.log(`set goals`);
-    this.router.navigate(['set-goals']);
-  }
-
-  personalGoals(): void {
-    console.log(`personal Goal`);
+  route(path): void {
+    this.router.navigate([path]);
   }
 
 }
