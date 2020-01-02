@@ -14,3 +14,5 @@
 [0325/130846.046:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0325/130958.611:ERROR:crash_report_database_win.cc(428)] unexpected header
 [0326/111743.103:ERROR:crash_report_database_win.cc(428)] unexpected header
+[0101/155222.776:ERROR:process_info.cc(359)] UncheckedAllocate
+[0102/154952.557:ERROR:process_info.cc(359)] UncheckedAllocate

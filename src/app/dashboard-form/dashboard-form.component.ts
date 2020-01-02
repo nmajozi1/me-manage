@@ -9,6 +9,11 @@ import { BudgetUpdateModalComponent } from '../budget-update-modal/budget-update
 import { MatDialog } from '@angular/material';
 import { CalculatorComponent } from '../calculator/calculator.component';
 
+import { Store, select } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
+import { GetNewBudget, } from '../home/state';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-dashboard-form',
   templateUrl: './dashboard-form.component.html',
@@ -28,7 +33,14 @@ export class DashboardFormComponent implements OnInit {
   color = 'accent';
   disabled = false;
 
-  constructor(private router: Router, private dashboardService: DashboardService, public dialog: MatDialog) {}
+  budget$: Observable<any>;
+
+  constructor(
+    private router: Router,
+    private dashboardService: DashboardService,
+    public dialog: MatDialog,
+    private store: Store<AppState>
+    ) {}
 
   addBillItem(): void {
     const dialogRef = this.dialog.open(BudgetListModalComponent, {
@@ -118,6 +130,31 @@ export class DashboardFormComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.budget$ = this.store.pipe(select(getMyBudget));
+
+    this.budget$.subscribe(budgetList => {
+
+      if (budgetList.budgetList) {
+        this.BudjetList = budgetList.budgetList;
+
+        this.refineData();
+      } else {
+        this.noDataInStore();
+      }
+
+    });
+
+    this.dashboardService.getDashboardData()
+    .subscribe((response: {}) => {
+
+      this.BudjetList = response;
+
+      this.refineData();
+    });
+  }
+
+  noDataInStore() {
     this.dashboardService.getDashboardData()
     .subscribe((response: {}) => {
 

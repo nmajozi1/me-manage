@@ -2,7 +2,7 @@
   <mat-card class="card-properties card-5">
       <form class="login-form">
         <div class="container" style="text-align: center">
-          <h3>Login</h3>
+          <h3>{{ testValue }}</h3>
           &nbsp;
         </div>
 
@@ -11,8 +11,10 @@
         &nbsp;
 
         <mat-form-field class="login-full-width">
-          <input matInput placeholder="Username" name="username" [(ngModel)]="data.username">
+          <input maxlength="10" matInput placeholder="Username" name="username" [(ngModel)]="data.username">
         </mat-form-field>
+
+        <app-error-handler *ngIf="data.username?.length >= 10"></app-error-handler>
 
         <mat-form-field class="login-full-width">
           <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="data.password">
@@ -25,8 +27,9 @@
         &nbsp;
 
         <!-- <button mat-raised-button color="primary" class="button-properties" (click)="register()">Register</button> -->
+        <!-- <app-test-component></app-test-component> -->
 
-        <div class="row">
+        <!-- <div class="row">
           <content style="padding-left: 20px; font-family: 'Times New Roman', Times, serif; color: blue; font-size: 20px; font-weight: bold; font-style: italic;">
             <label>Forgot Password</label>
           </content>
@@ -34,7 +37,7 @@
           <content style="padding-left: 35px; font-family: 'Times New Roman', Times, serif; color: blue; font-size: 20px; font-weight: bold; font-style: italic;">
             <label (click)="register()">Register</label>
           </content>
-        </div>
+        </div> -->
 
       </form>
   </mat-card>
