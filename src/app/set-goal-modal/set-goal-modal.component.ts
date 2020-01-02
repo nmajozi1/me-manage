@@ -7,6 +7,7 @@ export interface DialogData {
   goal: string;
   amount: number;
   purchased: boolean;
+  data: [];
 }
 
 @Component({

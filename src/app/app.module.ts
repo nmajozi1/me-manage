@@ -40,6 +40,19 @@ import { User } from './user';
 import { HomeComponent } from './home/home.component';
 import { GridRowsComponent } from './grid-rows/grid-rows.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { ErrorHandlerComponent } from './error-handler/error-handler.component';
+import { TestComponentComponent } from './test-component/test-component.component';
+import { ChartComponent } from './chart/chart.component';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import * as more from 'highcharts/highcharts-more.src';
+import * as exporting from 'highcharts/modules/exporting.src';
+import { ColumnChartComponent } from './column-chart/column-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { BarChartComponent } from './bar-chart/bar-chart.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { initialState, reducers, effects } from './app.state';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -63,7 +76,13 @@ import { CalculatorComponent } from './calculator/calculator.component';
     RefreshGoalComponent,
     HomeComponent,
     GridRowsComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ErrorHandlerComponent,
+    TestComponentComponent,
+    ChartComponent,
+    ColumnChartComponent,
+    PieChartComponent,
+    BarChartComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +99,18 @@ import { CalculatorComponent } from './calculator/calculator.component';
     FormsModule,
     MatSlideToggleModule,
     ReactiveFormsModule,
+    ChartModule,
+    EffectsModule.forRoot(effects),
+    StoreModule.forRoot(reducers, {initialState}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25
+    }),
   ],
   entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent, CalculatorComponent],
-  providers: [Common, HandleError, User],
+  providers: [
+    { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] },
+    Common, HandleError, User, TestComponentComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

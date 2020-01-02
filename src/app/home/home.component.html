@@ -5,13 +5,16 @@
 
   <div class="col-sm-4 col-properties" *ngFor="let dashboard of dashboards">
       <mat-card class="card-properties card-5" (click)="route(dashboard.path)">
-          <mat-card-title>
-            <h3>{{dashboard.name}}</h3>
-          </mat-card-title>
+        <mat-card-title>
+          <h3>{{dashboard.name}}</h3>
+        </mat-card-title>
 
-          <mat-card-content>
-            <p>{{dashboard.description}}</p>
-          </mat-card-content>
-        </mat-card>
+        <mat-card-content>
+          <p>{{dashboard.description}}</p>
+          <app-column-chart *ngIf="dashboard.name==='Budget List' || dashboard.name==='Top Up'"></app-column-chart>
+          <app-bar-chart *ngIf="dashboard.name==='Goal List'"></app-bar-chart>
+          <app-pie-chart *ngIf="dashboard.name==='Personal Goals'"></app-pie-chart>
+        </mat-card-content>
+      </mat-card>
   </div>
 </div>
