@@ -5,6 +5,9 @@ import { GOAL } from '../goal-items';
 import { SetGoalService } from '../services/set-goal.service';
 import { SetGoalModalComponent } from '../set-goal-modal/set-goal-modal.component';
 import { MatDialog } from '@angular/material';
+import { Store, select } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-set-goals-form',
@@ -17,8 +20,13 @@ export class SetGoalsFormComponent implements OnInit {
 
   count = 0;
   goalList: any = [];
+  setGoal$: Observable<any>;
 
-  constructor(private router: Router, private goalService: SetGoalService, public dialog: MatDialog) {}
+  constructor(
+    private goalService: SetGoalService,
+    public dialog: MatDialog,
+    private store: Store<AppState>
+    ) {}
 
   addBillItem() {
     const dialogRef = this.dialog.open(SetGoalModalComponent, {
@@ -52,11 +60,14 @@ export class SetGoalsFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.goalService.getGoals()
-    .subscribe(response => {
-      this.goalList = response;
+    this.setGoal$ = this.store.pipe(select(getMyBudget));
 
-      this.refineData();
+    this.setGoal$.subscribe(setGoalData => {
+      if (setGoalData.setGoalData) {
+        this.goalList = setGoalData.setGoalData;
+
+        this.refineData();
+      }
     });
   }
 

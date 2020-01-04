@@ -11,8 +11,8 @@ import { CalculatorComponent } from '../calculator/calculator.component';
 
 import { Store, select } from '@ngrx/store';
 import { AppState, getMyBudget } from '../app.state';
-import { GetNewBudget, } from '../home/state';
 import { Observable } from 'rxjs';
+import { UpdatePayment } from '../home/state';
 
 @Component({
   selector: 'app-dashboard-form',
@@ -36,7 +36,6 @@ export class DashboardFormComponent implements OnInit {
   budget$: Observable<any>;
 
   constructor(
-    private router: Router,
     private dashboardService: DashboardService,
     public dialog: MatDialog,
     private store: Store<AppState>
@@ -107,26 +106,33 @@ export class DashboardFormComponent implements OnInit {
   }
 
   payedUpdate(updateData) {
+    this.updatePayment(updateData);
+
     this.dashboardService.payedUpdate(updateData)
     .subscribe(response => {
-      console.log(response);
+      console.log('THE RESPONSE: ', response);
       this.onRefresh();
     });
   }
 
   onRefresh() {
-    // this.dashboardService.refreshPage();
     this.getDashData();
   }
 
   getDashData(): void {
-    this.dashboardService.getDashboardData()
-    .subscribe((response: {}) => {
+    this.budget$.subscribe(budgetList => {
 
-      this.BudjetList = response;
+      if (budgetList.budgetList) {
+        this.BudjetList = budgetList.budgetList;
 
-      this.refineData();
+        this.refineData();
+      }
+
     });
+  }
+
+  updatePayment(updateData) {
+    this.store.dispatch(new UpdatePayment({data: updateData}));
   }
 
   ngOnInit() {
@@ -139,28 +145,9 @@ export class DashboardFormComponent implements OnInit {
         this.BudjetList = budgetList.budgetList;
 
         this.refineData();
-      } else {
-        this.noDataInStore();
       }
 
     });
 
-    this.dashboardService.getDashboardData()
-    .subscribe((response: {}) => {
-
-      this.BudjetList = response;
-
-      this.refineData();
-    });
-  }
-
-  noDataInStore() {
-    this.dashboardService.getDashboardData()
-    .subscribe((response: {}) => {
-
-      this.BudjetList = response;
-
-      this.refineData();
-    });
   }
 }

@@ -1,4 +1,14 @@
-import { GET_NEW_BUDGET, GET_GOAL_COMPLETE, CREATE_NEW_BUDGET, GET_BUDGET_COMPLETE, GET_NEW_GOAL } from './budget.action';
+import {
+  GET_NEW_BUDGET,
+  GET_GOAL_COMPLETE,
+  CREATE_NEW_BUDGET,
+  GET_BUDGET_COMPLETE,
+  GET_NEW_GOAL,
+  GET_NEW_SET_GOAL,
+  SET_GOAL_COMPLETE,
+  UPDATE_PAYMENT,
+  UPDATE_PAYMENT_COMPLETE,
+} from './budget.action';
 import * as programActions from './budget.action';
 
 export function reducer(state: any, action: programActions.BudgetAction): any {
@@ -6,13 +16,6 @@ export function reducer(state: any, action: programActions.BudgetAction): any {
     case GET_NEW_BUDGET: {
       console.log('REDUCER: ', GET_NEW_BUDGET);
       return {};
-    }
-    case CREATE_NEW_BUDGET: {
-      console.log('REDUCER: ', CREATE_NEW_BUDGET);
-      return {
-        ...state,
-        isCreated: true
-      };
     }
     case GET_BUDGET_COMPLETE: {
       console.log('REDUCER: ', GET_BUDGET_COMPLETE);
@@ -33,6 +36,32 @@ export function reducer(state: any, action: programActions.BudgetAction): any {
       return {
         ...state,
         data: action.payload
+      };
+    }
+    case GET_NEW_SET_GOAL: {
+      console.log('REDUCER: ', GET_NEW_SET_GOAL);
+      return {
+        ...state
+      };
+    }
+    case SET_GOAL_COMPLETE: {
+      console.log('REDUCER: ', SET_GOAL_COMPLETE);
+      return {
+        ...state,
+        setGoalData: action.payload
+      };
+    }
+    case UPDATE_PAYMENT: {
+      console.log('REDUCER: ', UPDATE_PAYMENT);
+      return {
+        ...state
+      };
+    }
+    case UPDATE_PAYMENT_COMPLETE: {
+      console.log('REDUCER: ', UPDATE_PAYMENT_COMPLETE);
+      return {
+        ...state,
+        updatedPay: action.payload
       };
     }
     default: {
