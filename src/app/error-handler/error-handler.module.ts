@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ErrorHandlerComponent } from './error-handler.component';
+// import { ErrorHandlerComponent } from './error-handler.component';
 
 @NgModule({
-  declarations: [
-    ErrorHandlerComponent
-  ],
+  // declarations: [
+  //   ErrorHandlerComponent
+  // ],
   imports: [
     CommonModule
   ]
