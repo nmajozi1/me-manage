@@ -1,11 +1,12 @@
 export class Common {
   // base URL
-  baseUrl: string = 'http://localhost:9900/';
+  baseUrl = 'http://localhost:9900/';
+  awsBaseUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/';
 
   // goals
-  getGoals: any = 'getGoals';
-  createGoals: string = 'createGoals';
+  getGoals: any = 'goal/get';
+  createGoals = 'createGoals';
 
   // register
-  userReg: string = 'createUser';
+  userReg = 'createUser';
 }

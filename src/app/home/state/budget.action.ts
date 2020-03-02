@@ -11,6 +11,8 @@ export const UPDATE_PAYMENT = 'Update Payment';
 export const UPDATE_PAYMENT_COMPLETE = 'Update Payment Complete';
 export const GET_REFRESHED_BUDGET = 'Get Refreshed Budget';
 export const REFRESHED_BUDGET_COMPLETE = 'GRefreshed Budget Complete';
+export const LOGIN = 'Login User';
+export const LOGIN_COMPLETE = 'Login User Complete';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BUDGET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Create New Budget Data!!
@@ -136,8 +138,40 @@ export class SetGoalComplete implements Action {
 
 }
 
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LOGIN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export type BudgetAction = GetNewBudget | CreateNewBudget | GetBudgetComplete |
-                           GetNewGoal | GetGoalComplete | SetGoalComplete |
-                           UpdatePayment | UpdatePaymentComplete | GetRefreshedBudget |
-                          RefreshedBudgetComplete;
+export class Login implements Action {
+
+  readonly type: string = LOGIN;
+
+  constructor(public payload: any) {
+    console.log('ACTION ', LOGIN);
+  }
+
+}
+
+// Fetch Set Goal Complete Data
+export class LoginComplete implements Action {
+
+  readonly type: string = LOGIN_COMPLETE;
+
+  constructor(public payload: any) {
+    console.log('ACTION ', LOGIN_COMPLETE);
+  }
+
+}
+
+
+export type BudgetAction =
+GetNewBudget
+| CreateNewBudget
+| GetBudgetComplete
+| GetNewGoal
+| GetGoalComplete
+| SetGoalComplete
+| UpdatePayment
+| UpdatePaymentComplete
+| GetRefreshedBudget
+| RefreshedBudgetComplete
+| Login
+| LoginComplete;

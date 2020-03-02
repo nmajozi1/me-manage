@@ -6,6 +6,7 @@ export interface DialogData {
   item: string;
   amount: string;
   payment: string;
+  id: string;
 }
 
 @Component({
@@ -19,7 +20,7 @@ export class BudgetUpdateModalComponent implements OnInit {
   constructor(
     private dashboardService: DashboardService,
     public dialogRef: MatDialogRef<BudgetUpdateModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) { }
 
   ngOnInit() {
@@ -36,7 +37,15 @@ export class BudgetUpdateModalComponent implements OnInit {
   }
 
   remove() {
-    this.dashboardService.deleteItem(this.data)
+
+    const itemToRemove = {
+      TableName: 'budgets',
+      Key: {
+        id: this.data.id
+      }
+    };
+
+    this.dashboardService.deleteItem(itemToRemove)
     .subscribe(response => {
       this.dialogRef.close();
 

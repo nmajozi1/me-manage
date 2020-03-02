@@ -8,6 +8,8 @@ import {
   SET_GOAL_COMPLETE,
   UPDATE_PAYMENT,
   UPDATE_PAYMENT_COMPLETE,
+  LOGIN,
+  LOGIN_COMPLETE,
 } from './budget.action';
 import * as programActions from './budget.action';
 
@@ -62,6 +64,19 @@ export function reducer(state: any, action: programActions.BudgetAction): any {
       return {
         ...state,
         updatedPay: action.payload
+      };
+    }
+    case LOGIN: {
+      console.log('REDUCER: ', LOGIN);
+      return {
+        ...state
+      };
+    }
+    case LOGIN_COMPLETE: {
+      console.log('REDUCER: ', LOGIN_COMPLETE);
+      return {
+        ...state,
+        userDetails: action.payload
       };
     }
     default: {

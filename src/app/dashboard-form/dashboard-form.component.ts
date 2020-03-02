@@ -68,7 +68,7 @@ export class DashboardFormComponent implements OnInit {
     const dialogRef = this.dialog.open(BudgetUpdateModalComponent, {
       width: '300px',
       height: '350px',
-      data: {item: data.item, amount: data.amount, payment: data.payment}
+      data: {item: data.item, amount: data.amount, payment: data.payment, id: data.id}
     });
 
     dialogRef.afterClosed().subscribe(result => {

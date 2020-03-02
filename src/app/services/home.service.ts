@@ -10,8 +10,10 @@ export class HomeService {
 
   constructor(private http: HttpClient) { }
 
+  awsDashboardUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/dashboard/get';
+
   public getDashboard(): Observable<any> {
-    return this.http.get<any>('http://localhost:9900/getDashboard').pipe(retry(1), catchError(this.handleError));
+    return this.http.get<any>(this.awsDashboardUrl).pipe(retry(1), catchError(this.handleError));
   }
 
   handleError(error) {

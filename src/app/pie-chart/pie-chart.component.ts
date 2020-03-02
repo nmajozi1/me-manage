@@ -3,6 +3,8 @@ import { Chart } from 'angular-highcharts';
 import { DashboardService } from '../services/dashboard.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Store, select } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
 
 @Component({
   selector: 'app-pie-chart',
@@ -12,17 +14,23 @@ import { map } from 'rxjs/operators';
 export class PieChartComponent implements OnInit {
 
   chart$: Observable<Chart>;
+  personalGoals$: Observable<any>;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private store: Store<AppState>) { }
 
   ngOnInit() {
     this.initialiseChart();
   }
 
   initialiseChart() {
+    this.personalGoals$ = this.store.select(getMyBudget);
     this.generateChart().subscribe(res => {
       this.chart$ = res;
     });
+
+    this.personalGoals$.subscribe(res => {
+      console.log('THE RESPONSE: ', res.budgetList);
+    })
   }
 
   generateChart(): Observable<any> {

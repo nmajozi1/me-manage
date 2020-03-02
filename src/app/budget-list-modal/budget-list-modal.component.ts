@@ -30,7 +30,18 @@ export class BudgetListModalComponent implements OnInit {
   }
 
   submit() {
-    this.dashBoardService.addListItem(this.data)
+
+    const addBudgetData = {
+      TableName: 'budgets',
+      Item: {
+        amount: this.data.amount,
+        item: this.data.item,
+        payment: true,
+        username: 'ntokozo'
+      }
+    };
+
+    this.dashBoardService.addListItem(addBudgetData)
     .subscribe(response => {
       this.dialogRef.close();
 

@@ -10,24 +10,27 @@ import { Router } from '@angular/router';
 })
 export class DashboardService {
 
-  private budgetList = 'getBudgetList';
-  private deleteListItem = 'deleteBudget';
-  private addListUrl = 'http://localhost:9900/addBudget';
+  // private budgetList = 'getBudgetList';
+  // private addListUrl = 'http://localhost:9900/addBudget';
+  // private deleteListItem = 'deleteBudget';
   private updatePayUrl = 'http://localhost:9900/updatePayment';
   private updateBudget = 'updateBudget';
 
+  private awsBudgets = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/get';
+  private awsAddListUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/add';
+  private awsDeleteListItemUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/delete';
   private url = 'http://localhost:9900/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
   getDashboardData(): Observable<BudgetList> {
-    return this.http.get<BudgetList>(this.url + this.budgetList)
+    return this.http.post<any>(this.awsBudgets, {username: 'ntokozo'})
     .pipe(retry(1),
     catchError(this.handleError));
   }
 
   addListItem(data: any): Observable<BudgetList> {
-    return this.http.post<BudgetList>(this.addListUrl, data)
+    return this.http.post<BudgetList>(this.awsAddListUrl, data)
     .pipe(retry(1),
     catchError(this.handleError));
   }
@@ -45,7 +48,7 @@ export class DashboardService {
   }
 
   deleteItem(data: any): Observable<BudgetList> {
-    return this.http.post<BudgetList>(this.url + this.deleteListItem, data)
+    return this.http.post<BudgetList>(this.awsDeleteListItemUrl, data)
     .pipe(retry(1),
     catchError(this.handleError));
   }

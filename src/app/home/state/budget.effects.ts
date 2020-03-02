@@ -5,6 +5,8 @@ import {
   GET_NEW_GOAL,
   GET_NEW_SET_GOAL,
   UPDATE_PAYMENT,
+  LOGIN,
+  LOGIN_COMPLETE,
   GetNewBudget,
   GetNewGoal,
   GetBudgetComplete,
@@ -13,11 +15,15 @@ import {
   SetGoalComplete,
   UpdatePayment,
   UpdatePaymentComplete,
+  Login,
+  LoginComplete,
 } from './budget.action';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { HomeService } from 'src/app/services/home.service';
 import { SetGoalService } from 'src/app/services/set-goal.service';
+import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class BudgetEffect {
@@ -26,7 +32,9 @@ export class BudgetEffect {
     private action$: Actions,
     private dashboardService: DashboardService,
     private homeService: HomeService,
-    private goalService: SetGoalService
+    private goalService: SetGoalService,
+    private loginService: LoginService,
+    private router: Router,
     ) {}
 
   @Effect()
@@ -64,5 +72,20 @@ export class BudgetEffect {
       )
     )
   );
+
+  @Effect()
+  public initiateLogin = this.action$.pipe(
+    ofType(LOGIN),
+      switchMap((action: Login) => this.loginService.login(action.payload).pipe(
+        map(loginData => new LoginComplete(loginData))
+      )
+    )
+  );
+
+  @Effect({ dispatch: false })
+   loginSuccess$ = this.action$.pipe(
+     ofType(LOGIN_COMPLETE),
+     tap(() => this.router.navigate(['home']))
+   );
 
 }

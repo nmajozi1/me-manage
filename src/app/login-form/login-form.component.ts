@@ -5,6 +5,9 @@ import { User } from '../user';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TestComponentComponent } from '../test-component/test-component.component';
 import { debounceTime, distinct, distinctUntilChanged } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState } from '../app.state';
+import { Login } from '../home/state';
 
 @Component({
   selector: 'app-login-form',
@@ -16,7 +19,9 @@ export class LoginFormComponent implements OnInit {
 
   @Output() testOutput: EventEmitter<any> = new EventEmitter();
 
-  testValue = 'Test Value';
+  // testValue = 'Test Value';
+  header = 'Login';
+  TableName = 'Users';
 
   loginForm = new FormGroup({
     name: new FormControl(''),
@@ -28,24 +33,19 @@ export class LoginFormComponent implements OnInit {
     private loginService: LoginService,
     public data: User,
     public testComponent: TestComponentComponent,
+    private store: Store<AppState>,
     ) {}
 
   // name = new FormControl('');
 
   login(): void {
-    console.log(this.data);
-    this.loginService.login(this.data)
-    .subscribe((response) => {
-      console.log('RESPONSE: ', response);
-      this.router.navigate(['home']);
-    });
 
-    // console.warn(this.loginForm.value);
-  }
+    const loginData = {
+      ...this.data,
+      TableName: this.TableName
+    };
 
-  testSubject() {
-    console.log('Am I being called?');
-    // this.test.emit();
+    this.store.dispatch(new Login(loginData));
   }
 
   register() {
