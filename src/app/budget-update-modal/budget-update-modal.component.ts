@@ -1,6 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DashboardService } from '../services/dashboard.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Store } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
+import { RemoveBudgetListItem, UpdatePayment } from '../home/state';
+import { take } from 'rxjs/operators';
 
 export interface DialogData {
   item: string;
@@ -21,35 +25,47 @@ export class BudgetUpdateModalComponent implements OnInit {
     private dashboardService: DashboardService,
     public dialogRef: MatDialogRef<BudgetUpdateModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
+    private store: Store<AppState>
     ) { }
 
   ngOnInit() {
   }
 
   onSubmit(): void {
-    this.dashboardService.updateItem(this.data)
-    .subscribe(response => {
-      console.log(response);
+
+    this.store.select(getMyBudget).pipe(take(1)).subscribe(res => {
+      const updateData = {
+        TableName: 'budgets',
+        Item: {
+          id: this.data.id,
+          amount: +this.data.amount,
+          item: this.data.item,
+          payment: this.data.payment,
+          username: res.user.userDetails.data.username
+        }
+      };
+
+      this.store.dispatch(new UpdatePayment({ data: updateData }));
 
       this.dialogRef.close();
-      this.onRefresh();
     });
   }
 
   remove() {
+    this.store.select(getMyBudget).pipe(take(1)).subscribe(res => {
 
-    const itemToRemove = {
-      TableName: 'budgets',
-      Key: {
-        id: this.data.id
-      }
-    };
+      const itemToRemove = {
+        TableName: 'budgets',
+        Key: {
+          id: this.data.id,
+          username: res.user.userDetails.data.username
+        }
+      };
 
-    this.dashboardService.deleteItem(itemToRemove)
-    .subscribe(response => {
+      this.store.dispatch(new RemoveBudgetListItem(itemToRemove));
+
       this.dialogRef.close();
 
-      this.onRefresh();
     });
   }
 

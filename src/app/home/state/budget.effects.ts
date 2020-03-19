@@ -5,8 +5,8 @@ import {
   GET_NEW_GOAL,
   GET_NEW_SET_GOAL,
   UPDATE_PAYMENT,
-  LOGIN,
-  LOGIN_COMPLETE,
+  ADD_BUDGET_LIST_ITEM,
+  ADD_BUDGET_LIST_COMPLETE,
   GetNewBudget,
   GetNewGoal,
   GetBudgetComplete,
@@ -15,15 +15,20 @@ import {
   SetGoalComplete,
   UpdatePayment,
   UpdatePaymentComplete,
-  Login,
-  LoginComplete,
+  AddBudgetListItem,
+  AddBudgetListComplete,
+  UPDATE_PAYMENT_COMPLETE,
+  REMOVE_BUDGET_LIST_ITEM,
+  RemoveBudgetListItem,
+  RemoveBudgetListComplete,
+  REMOVE_BUDGET_LIST_COMPLETE,
 } from './budget.action';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { HomeService } from 'src/app/services/home.service';
 import { SetGoalService } from 'src/app/services/set-goal.service';
-import { LoginService } from 'src/app/services/login.service';
-import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState, getMyBudget } from 'src/app/app.state';
 
 @Injectable()
 export class BudgetEffect {
@@ -33,14 +38,13 @@ export class BudgetEffect {
     private dashboardService: DashboardService,
     private homeService: HomeService,
     private goalService: SetGoalService,
-    private loginService: LoginService,
-    private router: Router,
+    private store: Store<AppState>,
     ) {}
 
   @Effect()
   public initiateBudget = this.action$.pipe(
     ofType(GET_NEW_BUDGET),
-      switchMap((action: GetNewBudget) => this.dashboardService.getDashboardData().pipe(
+      switchMap((action: GetNewBudget) => this.dashboardService.getDashboardData(action.payload).pipe(
         map(budgetData => new GetBudgetComplete(budgetData))
       )
     )
@@ -58,7 +62,7 @@ export class BudgetEffect {
   @Effect()
   public initiateSetGoal = this.action$.pipe(
     ofType(GET_NEW_SET_GOAL),
-      switchMap((action: GetNewSetGoal) => this.goalService.getGoals().pipe(
+      switchMap((action: GetNewSetGoal) => this.goalService.getGoals(action.payload).pipe(
         map(goalData => new SetGoalComplete(goalData))
       )
     )
@@ -73,19 +77,39 @@ export class BudgetEffect {
     )
   );
 
+  @Effect({ dispatch: false })
+   updateSuccess$ = this.action$.pipe(
+     ofType(UPDATE_PAYMENT_COMPLETE),
+     tap((action: UpdatePaymentComplete) => this.store.dispatch(new GetNewBudget({username: action.payload.data.Item.username}))),
+   );
+
   @Effect()
-  public initiateLogin = this.action$.pipe(
-    ofType(LOGIN),
-      switchMap((action: Login) => this.loginService.login(action.payload).pipe(
-        map(loginData => new LoginComplete(loginData))
+  public initiateAddListItem = this.action$.pipe(
+    ofType(ADD_BUDGET_LIST_ITEM),
+      switchMap((action: AddBudgetListItem) => this.dashboardService.addListItem(action.payload).pipe(
+        map(goalData => new AddBudgetListComplete(goalData))
       )
     )
   );
 
   @Effect({ dispatch: false })
-   loginSuccess$ = this.action$.pipe(
-     ofType(LOGIN_COMPLETE),
-     tap(() => this.router.navigate(['home']))
+   addSuccess$ = this.action$.pipe(
+     ofType(ADD_BUDGET_LIST_COMPLETE),
+     tap((action: AddBudgetListComplete) => this.store.dispatch(new GetNewBudget({username: action.payload.data.Item.username}))),
    );
 
+   @Effect()
+  public initiateRemoveListItem = this.action$.pipe(
+    ofType(REMOVE_BUDGET_LIST_ITEM),
+      switchMap((action: RemoveBudgetListItem) => this.dashboardService.deleteItem(action.payload).pipe(
+        map(goalData => new RemoveBudgetListComplete(goalData))
+      )
+    )
+  );
+
+  @Effect({ dispatch: false })
+   removeSuccess$ = this.action$.pipe(
+     ofType(REMOVE_BUDGET_LIST_COMPLETE),
+     tap((action: RemoveBudgetListComplete) => this.store.dispatch(new GetNewBudget({username: action.payload.input.Key.username}))),
+   );
 }

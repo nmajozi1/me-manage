@@ -30,11 +30,11 @@ export class PieChartComponent implements OnInit {
 
     this.personalGoals$.subscribe(res => {
       console.log('THE RESPONSE: ', res.budgetList);
-    })
+    });
   }
 
   generateChart(): Observable<any> {
-    return this.dashboardService.getDashboardData().pipe(
+    return this.dashboardService.getDashboardData({username: 'ntokozo'}).pipe(
       map(results => {
         const options: any = {
           chart: {

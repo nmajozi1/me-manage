@@ -8,8 +8,10 @@ import {
   SET_GOAL_COMPLETE,
   UPDATE_PAYMENT,
   UPDATE_PAYMENT_COMPLETE,
-  LOGIN,
-  LOGIN_COMPLETE,
+  ADD_BUDGET_LIST_ITEM,
+  ADD_BUDGET_LIST_COMPLETE,
+  REMOVE_BUDGET_LIST_ITEM,
+  REMOVE_BUDGET_LIST_COMPLETE,
 } from './budget.action';
 import * as programActions from './budget.action';
 
@@ -30,14 +32,14 @@ export function reducer(state: any, action: programActions.BudgetAction): any {
       console.log('REDUCER: ', GET_GOAL_COMPLETE);
       return {
         ...state,
-        data: action.payload
+        dashData: action.payload
       };
     }
     case GET_NEW_GOAL: {
       console.log('REDUCER: ', GET_NEW_GOAL);
       return {
         ...state,
-        data: action.payload
+        dashData: action.payload
       };
     }
     case GET_NEW_SET_GOAL: {
@@ -66,17 +68,30 @@ export function reducer(state: any, action: programActions.BudgetAction): any {
         updatedPay: action.payload
       };
     }
-    case LOGIN: {
-      console.log('REDUCER: ', LOGIN);
+    case ADD_BUDGET_LIST_ITEM: {
+      console.log('REDUCER: ', ADD_BUDGET_LIST_ITEM);
       return {
         ...state
       };
     }
-    case LOGIN_COMPLETE: {
-      console.log('REDUCER: ', LOGIN_COMPLETE);
+    case ADD_BUDGET_LIST_COMPLETE: {
+      console.log('REDUCER: ', ADD_BUDGET_LIST_COMPLETE);
       return {
         ...state,
-        userDetails: action.payload
+        addedItem: action.payload
+      };
+    }
+    case REMOVE_BUDGET_LIST_ITEM: {
+      console.log('REDUCER: ', REMOVE_BUDGET_LIST_ITEM);
+      return {
+        ...state
+      };
+    }
+    case REMOVE_BUDGET_LIST_COMPLETE: {
+      console.log('REDUCER: ', REMOVE_BUDGET_LIST_COMPLETE);
+      return {
+        ...state,
+        removedItem: action.payload
       };
     }
     default: {

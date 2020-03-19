@@ -51,7 +51,7 @@ export class SetGoalsFormComponent implements OnInit {
   }
 
   getGoalData() {
-    this.goalService.getGoals()
+    this.goalService.getGoals({username: 'ntokozo'})
     .subscribe(response => {
       this.goalList = response;
 
@@ -63,8 +63,8 @@ export class SetGoalsFormComponent implements OnInit {
     this.setGoal$ = this.store.pipe(select(getMyBudget));
 
     this.setGoal$.subscribe(setGoalData => {
-      if (setGoalData.setGoalData) {
-        this.goalList = setGoalData.setGoalData;
+      if (setGoalData.budget.setGoalData) {
+        this.goalList = setGoalData.budget.setGoalData;
 
         this.refineData();
       }

@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of BudjetList.data">
+      <tr *ngFor="let item of BudjetList">
         <td (click)="upadetItem(item)">{{ item.item }}</td>
         <td (click)="upadetItem(item)">R {{ item.amount }}</td>
         <td>

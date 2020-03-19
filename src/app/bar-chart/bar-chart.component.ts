@@ -27,7 +27,7 @@ export class BarChartComponent implements OnInit {
   }
 
   generateChart(): Observable<any> {
-    return this.setGoalsService.getGoals().pipe(
+    return this.setGoalsService.getGoals({username: 'ntokozo'}).pipe(
       map(results => {
         const options: any = {
           chart: {

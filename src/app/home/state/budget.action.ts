@@ -11,8 +11,10 @@ export const UPDATE_PAYMENT = 'Update Payment';
 export const UPDATE_PAYMENT_COMPLETE = 'Update Payment Complete';
 export const GET_REFRESHED_BUDGET = 'Get Refreshed Budget';
 export const REFRESHED_BUDGET_COMPLETE = 'GRefreshed Budget Complete';
-export const LOGIN = 'Login User';
-export const LOGIN_COMPLETE = 'Login User Complete';
+export const ADD_BUDGET_LIST_ITEM = 'Add Budget Item';
+export const ADD_BUDGET_LIST_COMPLETE = 'Add Budget Item Complete';
+export const REMOVE_BUDGET_LIST_ITEM = 'Remove List Item';
+export const REMOVE_BUDGET_LIST_COMPLETE = 'Remove List Item Complete';
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BUDGET ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Create New Budget Data!!
@@ -138,25 +140,50 @@ export class SetGoalComplete implements Action {
 
 }
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ LOGIN ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ADD LIST ITEM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-export class Login implements Action {
+// Fetch Set Goal Data
+export class AddBudgetListItem implements Action {
 
-  readonly type: string = LOGIN;
+  readonly type: string = ADD_BUDGET_LIST_ITEM;
 
   constructor(public payload: any) {
-    console.log('ACTION ', LOGIN);
+    console.log('ACTION ', ADD_BUDGET_LIST_ITEM);
   }
 
 }
 
 // Fetch Set Goal Complete Data
-export class LoginComplete implements Action {
+export class AddBudgetListComplete implements Action {
 
-  readonly type: string = LOGIN_COMPLETE;
+  readonly type: string = ADD_BUDGET_LIST_COMPLETE;
 
   constructor(public payload: any) {
-    console.log('ACTION ', LOGIN_COMPLETE);
+    console.log('ACTION ', ADD_BUDGET_LIST_COMPLETE);
+  }
+
+}
+
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ REMOVE LIST ITEM ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Fetch Set Goal Data
+export class RemoveBudgetListItem implements Action {
+
+  readonly type: string = REMOVE_BUDGET_LIST_ITEM;
+
+  constructor(public payload: any) {
+    console.log('ACTION ', REMOVE_BUDGET_LIST_ITEM);
+  }
+
+}
+
+// Fetch Set Goal Complete Data
+export class RemoveBudgetListComplete implements Action {
+
+  readonly type: string = REMOVE_BUDGET_LIST_COMPLETE;
+
+  constructor(public payload: any) {
+    console.log('ACTION ', REMOVE_BUDGET_LIST_COMPLETE);
   }
 
 }
@@ -173,5 +200,7 @@ GetNewBudget
 | UpdatePaymentComplete
 | GetRefreshedBudget
 | RefreshedBudgetComplete
-| Login
-| LoginComplete;
+| AddBudgetListItem
+| AddBudgetListComplete
+| RemoveBudgetListItem
+| RemoveBudgetListComplete;

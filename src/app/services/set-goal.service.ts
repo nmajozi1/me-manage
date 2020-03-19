@@ -15,9 +15,9 @@ export class SetGoalService {
 
   constructor(private http: HttpClient, private common: Common, private handleError: HandleError, private router: Router) { }
 
-  getGoals(): Observable<GoalList> {
+  getGoals(data: any): Observable<GoalList> {
     console.log('URL: ', this.common.awsBaseUrl + this.common.getGoals);
-    return this.http.post<GoalList>(this.common.awsBaseUrl + this.common.getGoals, { username: 'ntokozo' })
+    return this.http.post<GoalList>(this.common.awsBaseUrl + this.common.getGoals, data)
     .pipe(retry(1),
     catchError(this.handleError.handleError));
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { BUDGET } from '../budget-items';
 import { Router } from '@angular/router';
 import { BudgetList } from '../budget-list';
@@ -19,7 +19,7 @@ import { UpdatePayment } from '../home/state';
   templateUrl: './dashboard-form.component.html',
   styleUrls: ['./dashboard-form.component.css']
 })
-export class DashboardFormComponent implements OnInit {
+export class DashboardFormComponent implements OnInit, AfterViewInit {
   add: any = '+';
   count: any = 0;
   countPaid: any = 0;
@@ -106,13 +106,24 @@ export class DashboardFormComponent implements OnInit {
   }
 
   payedUpdate(updateData) {
-    this.updatePayment(updateData);
 
-    this.dashboardService.payedUpdate(updateData)
-    .subscribe(response => {
-      console.log('THE RESPONSE: ', response);
-      this.onRefresh();
-    });
+    let payment: boolean;
+
+    if (updateData.payment === false )  { payment = true; } else { payment = false; }
+
+    const updated = {
+      TableName: 'budgets',
+      Item: {
+        id: updateData.id,
+        amount: updateData.amount,
+        item: updateData.item,
+        payment,
+        username: updateData.username
+      }
+    };
+
+    console.log('ITEM: ', updated);
+    this.store.dispatch(new UpdatePayment({data: updated}));
   }
 
   onRefresh() {
@@ -131,23 +142,29 @@ export class DashboardFormComponent implements OnInit {
     });
   }
 
-  updatePayment(updateData) {
-    this.store.dispatch(new UpdatePayment({data: updateData}));
-  }
+  ngOnInit() {}
 
-  ngOnInit() {
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.store.pipe(select(getMyBudget)).subscribe(budgetList => {
+        if (budgetList.budget.budgetList) {
 
-    this.budget$ = this.store.pipe(select(getMyBudget));
+          this.count = 0;
+          this.countPaid = 0;
+          this.countUnpaid = 0;
 
-    this.budget$.subscribe(budgetList => {
+          this.BudjetList = budgetList.budget.budgetList.data;
 
-      if (budgetList.budgetList) {
-        this.BudjetList = budgetList.budgetList;
-
-        this.refineData();
-      }
-
-    });
-
+          this.BudjetList.forEach(element => {
+            this.count = this.count + element.amount;
+            if (element.payment) {
+              this.countPaid = this.countPaid + element.amount;
+            } else {
+              this.countUnpaid = this.countUnpaid + element.amount;
+            }
+          });
+        }
+      });
+    }, 1);
   }
 }

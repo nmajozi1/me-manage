@@ -26,7 +26,7 @@ export class ColumnChartComponent implements OnInit {
   }
 
   generateChart(): Observable<any> {
-    return this.dashboardService.getDashboardData().pipe(
+    return this.dashboardService.getDashboardData({username: 'ntokozo'}).pipe(
       map(results => {
         const options: any = {
           chart: {

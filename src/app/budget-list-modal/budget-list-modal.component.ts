@@ -2,6 +2,9 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DashboardService } from '../services/dashboard.service';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
+import { AddBudgetListItem } from '../home/state';
 
 export interface DialogData {
   item: string;
@@ -19,7 +22,9 @@ export class BudgetListModalComponent implements OnInit {
     public dialogRef: MatDialogRef<BudgetListModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     public dashBoardService: DashboardService,
-    private router: Router) { }
+    private router: Router,
+    private store: Store<AppState>,
+    ) { }
 
   onCancel() {
     this.dialogRef.close();
@@ -34,19 +39,23 @@ export class BudgetListModalComponent implements OnInit {
     const addBudgetData = {
       TableName: 'budgets',
       Item: {
-        amount: this.data.amount,
+        amount: +this.data.amount,
         item: this.data.item,
         payment: true,
         username: 'ntokozo'
       }
     };
 
-    this.dashBoardService.addListItem(addBudgetData)
-    .subscribe(response => {
-      this.dialogRef.close();
+    this.store.dispatch(new AddBudgetListItem(addBudgetData));
 
-      this.reloadPage();
-    });
+    this.dialogRef.close();
+
+    // this.dashBoardService.addListItem(addBudgetData)
+    // .subscribe(response => {
+    //   this.dialogRef.close();
+
+    //   this.reloadPage();
+    // });
   }
 
   ngOnInit() {

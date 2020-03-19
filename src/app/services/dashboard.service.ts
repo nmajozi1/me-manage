@@ -13,18 +13,19 @@ export class DashboardService {
   // private budgetList = 'getBudgetList';
   // private addListUrl = 'http://localhost:9900/addBudget';
   // private deleteListItem = 'deleteBudget';
-  private updatePayUrl = 'http://localhost:9900/updatePayment';
+  // private updatePayUrl = 'http://localhost:9900/updatePayment';
   private updateBudget = 'updateBudget';
 
   private awsBudgets = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/get';
   private awsAddListUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/add';
   private awsDeleteListItemUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/delete';
+  private awsUpdatePayUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/update';
   private url = 'http://localhost:9900/';
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getDashboardData(): Observable<BudgetList> {
-    return this.http.post<any>(this.awsBudgets, {username: 'ntokozo'})
+  getDashboardData(data: any): Observable<BudgetList> {
+    return this.http.post<any>(this.awsBudgets, data)
     .pipe(retry(1),
     catchError(this.handleError));
   }
@@ -36,7 +37,7 @@ export class DashboardService {
   }
 
   payedUpdate(data: any): Observable<BudgetList> {
-    return this.http.post<BudgetList>(this.updatePayUrl, data)
+    return this.http.post<BudgetList>(this.awsUpdatePayUrl, data)
     .pipe(retry(1),
     catchError(this.handleError));
   }
@@ -58,6 +59,7 @@ export class DashboardService {
   }
 
   handleError(error: any) {
+    console.log('ERROR: ', error);
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
       errorMessage = error.error.message;
