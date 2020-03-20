@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 import { DashboardService } from '../services/dashboard.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { AppState, getMyBudget } from '../app.state';
 
 @Component({
   selector: 'app-column-chart',
@@ -13,20 +15,27 @@ export class ColumnChartComponent implements OnInit {
 
   chart$: Observable<Chart>;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(
+    private dashboardService: DashboardService,
+    private store: Store<AppState>
+    ) { }
 
   ngOnInit() {
     this.initialiseChart();
   }
 
   initialiseChart() {
-    this.generateChart().subscribe(res => {
-      this.chart$ = res;
+
+    this.store.select(getMyBudget).pipe(take(1)).subscribe(res => {
+      this.generateChart({username: res.user.userDetails.data.username}).subscribe(chart => {
+        this.chart$ = chart;
+      });
     });
+
   }
 
-  generateChart(): Observable<any> {
-    return this.dashboardService.getDashboardData({username: 'ntokozo'}).pipe(
+  generateChart(userData): Observable<any> {
+    return this.dashboardService.getDashboardData(userData).pipe(
       map(results => {
         const options: any = {
           chart: {

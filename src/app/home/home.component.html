@@ -11,10 +11,12 @@
 
         <mat-card-content>
           <p>{{dashboard.description}}</p>
-          <app-column-chart *ngIf="dashboard.name==='Budget List' || dashboard.name==='Top Up'"></app-column-chart>
-          <app-bar-chart *ngIf="dashboard.name==='Goal List'"></app-bar-chart>
-          <app-pie-chart *ngIf="dashboard.name==='Personal Goals'"></app-pie-chart>
+          <app-column-chart *ngIf="dashboard.name==='Budget List'"></app-column-chart>
+          <!-- <app-bar-chart *ngIf="dashboard.name==='Goal List'"></app-bar-chart>
+          <app-pie-chart *ngIf="dashboard.name==='Personal Goals'"></app-pie-chart> -->
         </mat-card-content>
       </mat-card>
   </div>
 </div>
+
+<!-- dashboard.name==='Top Up' -->

@@ -11,10 +11,12 @@ import { HandleError } from '../handle-error';
 })
 export class RegService {
 
+  awsRegUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/users/add';
+
   constructor(private common: Common, private http: HttpClient, private handleError: HandleError) { }
 
   userReg(userData): Observable<User> {
-    return this.http.post<User>(this.common.baseUrl + this.common.userReg, userData)
+    return this.http.post<User>(this.awsRegUrl, userData)
     .pipe(retry(1),
     catchError(this.handleError.handleError));
   }

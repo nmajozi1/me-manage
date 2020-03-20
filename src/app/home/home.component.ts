@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.store.select(getMyBudget).pipe(take(1)).subscribe(goals => {
         if (goals.budget.dashData) {
-          console.log('DO NOTHING! ');
+
         } else {
           try {
             const userData = { username: goals.user.userDetails.data.username };
