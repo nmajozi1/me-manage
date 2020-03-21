@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AppState, getMyBudget } from '../app.state';
 import { AddBudgetListItem } from '../home/state';
+import { take } from 'rxjs/operators';
 
 export interface DialogData {
   item: string;
@@ -36,26 +37,24 @@ export class BudgetListModalComponent implements OnInit {
 
   submit() {
 
-    const addBudgetData = {
-      TableName: 'budgets',
-      Item: {
-        amount: +this.data.amount,
-        item: this.data.item,
-        payment: true,
-        username: 'ntokozo'
-      }
-    };
+    this.store.select(getMyBudget).pipe(take(1)).subscribe(userData => {
 
-    this.store.dispatch(new AddBudgetListItem(addBudgetData));
+      const addBudgetData = {
+        TableName: 'budgets',
+        Item: {
+          amount: +this.data.amount,
+          item: this.data.item,
+          payment: true,
+          username: userData.user.userDetails.data.username
+        }
+      };
 
-    this.dialogRef.close();
+      this.store.dispatch(new AddBudgetListItem(addBudgetData));
 
-    // this.dashBoardService.addListItem(addBudgetData)
-    // .subscribe(response => {
-    //   this.dialogRef.close();
+      this.dialogRef.close();
 
-    //   this.reloadPage();
-    // });
+    });
+
   }
 
   ngOnInit() {
