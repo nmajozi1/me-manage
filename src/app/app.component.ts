@@ -16,35 +16,35 @@ export class AppComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit() {
-    this.loginData$ = this.store.select(getMyBudget);
+    // this.loginData$ = this.store.select(getMyBudget);
     // this.newBudget();
     // this.newGoals();
     // this.setGoal();
   }
 
-  newBudget() {
-    this.loginData$.subscribe(res => {
-      if (res.user.userDetails) {
-        const userData = { username: res.user.userDetails.data.username };
-        this.store.dispatch(new GetNewBudget(userData));
-      }
-    });
-  }
+  // newBudget() {
+  //   this.loginData$.subscribe(res => {
+  //     if (res.user.userDetails) {
+  //       const userData = { username: res.user.userDetails.data.username };
+  //       this.store.dispatch(new GetNewBudget(userData));
+  //     }
+  //   });
+  // }
 
-  newGoals() {
-    this.loginData$.subscribe(res => {
-      if (res.userDetails) {
-        this.store.dispatch(new GetNewGoal(null));
-      }
-    });
-  }
+  // newGoals() {
+  //   this.loginData$.subscribe(res => {
+  //     if (res.userDetails) {
+  //       this.store.dispatch(new GetNewGoal(null));
+  //     }
+  //   });
+  // }
 
-  setGoal() {
-    this.loginData$.subscribe(res => {
-      if (res.userDetails) {
-        const userData = { username: res.userDetails.data.username };
-        this.store.dispatch(new GetNewSetGoal(userData));
-      }
-    });
-  }
+  // setGoal() {
+  //   this.loginData$.subscribe(res => {
+  //     if (res.userDetails) {
+  //       const userData = { username: res.userDetails.data.username };
+  //       this.store.dispatch(new GetNewSetGoal(userData));
+  //     }
+  //   });
+  // }
 }

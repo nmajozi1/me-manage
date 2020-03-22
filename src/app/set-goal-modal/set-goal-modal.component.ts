@@ -20,7 +20,8 @@ export class SetGoalModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<SetGoalModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    public setGoalsService: SetGoalService) { }
+    public setGoalsService: SetGoalService
+    ) { }
 
   onCancel() {
     this.dialogRef.close();

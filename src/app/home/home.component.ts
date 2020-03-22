@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             const userData = { username: goals.user.userDetails.data.username };
             this.store.dispatch(new GetNewBudget(userData));
             this.store.dispatch(new GetNewGoal(null));
-            this.store.dispatch(new GetNewSetGoal(userData));
+            // this.store.dispatch(new GetNewSetGoal(userData));
           } catch (error) {
             console.log(error);
           }

@@ -31,10 +31,6 @@ export class BudgetListModalComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  reloadPage() {
-    this.dashBoardService.refreshPage();
-  }
-
   submit() {
 
     this.store.select(getMyBudget).pipe(take(1)).subscribe(userData => {

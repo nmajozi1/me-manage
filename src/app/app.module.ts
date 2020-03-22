@@ -53,6 +53,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { initialState, reducers, effects } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
+import { ErrorModalComponent } from './error-modal/error-modal.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -82,7 +83,8 @@ import { EffectsModule } from '@ngrx/effects';
     ChartComponent,
     ColumnChartComponent,
     PieChartComponent,
-    BarChartComponent
+    BarChartComponent,
+    ErrorModalComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,7 @@ import { EffectsModule } from '@ngrx/effects';
       maxAge: 25
     }),
   ],
-  entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent, CalculatorComponent],
+  entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent, CalculatorComponent, ErrorModalComponent],
   providers: [
     { provide: HIGHCHARTS_MODULES, useFactory: () => [ more, exporting ] },
     Common, HandleError, User, TestComponentComponent
