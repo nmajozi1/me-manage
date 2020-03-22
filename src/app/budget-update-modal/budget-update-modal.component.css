@@ -1,3 +1,9 @@
 .input-full-width {
   width: 100%;
 }
+
+.mat-button-custom {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}

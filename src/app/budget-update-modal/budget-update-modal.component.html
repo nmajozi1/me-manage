@@ -15,8 +15,8 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color = "primary" (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color = "primary" (click)="onSubmit()">Update</button>
-  <button mat-raised-button color = "primary" (click)="remove()">Remove</button>
+  <button  class="mat-button-custom" mat-raised-button color = "primary" (click)="onCancel()">Cancel</button>
+  <button class="mat-button-custom" mat-raised-button color = "primary" (click)="onSubmit()">Update</button>
+  <button class="mat-button-custom" mat-raised-button color = "primary" (click)="remove()">Remove</button>
   <button mat-button [mat-dialog-close]="data" cdkFocusInitial></button>
 </div>
