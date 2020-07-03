@@ -15,6 +15,7 @@ export class DashboardService {
   private awsAddListUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/add';
   private awsDeleteListItemUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/delete';
   private awsUpdatePayUrl = 'https://kpj57ajajb.execute-api.eu-west-1.amazonaws.com/dev/budget/update';
+  private artists = 'http://localhost:3000/dev/artists/get';
 
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) { }
 
@@ -40,6 +41,10 @@ export class DashboardService {
     return this.http.post<BudgetList>(this.awsDeleteListItemUrl, data)
     .pipe(retry(1),
     catchError(this.handleError));
+  }
+
+  public geyArtists(): Observable<any> {
+    return this.http.get<any>(this.artists).pipe(retry(1), catchError(this.handleError));
   }
 
   refreshPage() {

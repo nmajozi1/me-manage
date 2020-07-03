@@ -8,6 +8,7 @@ import { debounceTime, distinct, distinctUntilChanged } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.state';
 import { Login } from '../home/state';
+import { Md5 } from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'app-login-form',
@@ -36,9 +37,9 @@ export class LoginFormComponent implements OnInit {
     private store: Store<AppState>,
     ) {}
 
-  // name = new FormControl('');
-
   login(): void {
+    const md5 = new Md5();
+    console.log('HASH: ', md5.appendStr(this.data.password).end());
 
     const loginData = {
       ...this.data,

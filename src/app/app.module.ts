@@ -54,6 +54,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { initialState, reducers, effects } from './app.state';
 import { EffectsModule } from '@ngrx/effects';
 import { ErrorModalComponent } from './error-modal/error-modal.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -107,6 +109,7 @@ import { ErrorModalComponent } from './error-modal/error-modal.component';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   entryComponents: [BudgetListModalComponent, BudgetUpdateModalComponent, SetGoalModalComponent, CalculatorComponent, ErrorModalComponent],
   providers: [

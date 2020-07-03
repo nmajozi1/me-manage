@@ -144,6 +144,13 @@ export class DashboardFormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {}
 
+  getArtists() {
+    console.log('Get Artists!');
+    this.dashboardService.geyArtists().subscribe(res => {
+      console.log('The Response: ', res);
+    });
+  }
+
   ngAfterViewInit() {
     setTimeout(() => {
       this.store.pipe(select(getMyBudget)).subscribe(budgetList => {
