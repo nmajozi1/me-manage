@@ -30,7 +30,7 @@
     "angular-datatables": "^8.0.0",
     "angular-highcharts": "^8.0.3",
     "core-js": "^2.5.4",
-    "datatables.net": "^1.10.20",
+    "datatables.net": "^1.10.22",
     "datatables.net-dt": "^1.10.20",
     "forms": "^1.3.0",
     "hammerjs": "^2.0.8",
